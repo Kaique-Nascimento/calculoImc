@@ -197,33 +197,41 @@ def pessoaEspecifica(idPessoa):
         if conn:
             conn.close()
 
+
+
 def mostrarGrafico():
     try:
         conn = bd.connect('imc.db')
         cursor = conn.cursor()
         cursor.execute('SELECT tb01_classificacao, count(*) as quantidade from tb01_pessoa group by tb01_classificacao')
         pessoas = cursor.fetchall()
-        if not pessoas:
-            print("Não há dados cadastrados!")
-            input()
-            return
-        classificacoes = []
-        quantidades = []
+        
+        classificacoes = ['Abaixo do peso normal', 'Peso normal', 'Excesso de Peso', 'Obesidade Classe I', 'Obesidade Classe II', 'Obesidade Classe III']
+        
+        quantidades_dict = {classificacao: 0 for classificacao in classificacoes}
+        
         for pessoa in pessoas:
-            classificacoes.append(pessoa[0])
-            quantidades.append(pessoa[1])
+            quantidades_dict[pessoa[0]] = pessoa[1]
+        
         x = np.array(classificacoes)
-        y = np.array(quantidades)
+        y = np.array([quantidades_dict[classificacao] for classificacao in classificacoes])
+        
+        plt.figure(figsize=(12, 6))  # Mover a chamada de plt.figure() para o início
+        
         plt.xlabel("Classificação")
         plt.ylabel("Quantidade")
-        plt.title("Pessoas")
+        plt.title("Distribuição de Pessoas por Classificação")
         plt.gca().yaxis.get_major_locator().set_params(integer=True)
-        plt.bar(x,y)
-        #Se estiver usando o Google Shell Cloud, não será mostrado o gráfico
+        plt.bar(x, y, width=0.5)
+        
         plt.show()
 
     except Exception as e:
-        print("Deu erro: "+e)
+        print("Erro: " + str(e))
+
+    except Exception as e:
+        print("Erro: " + str(e))
+
             
 def apagarPessoa():
     if not listarPessoas():  
