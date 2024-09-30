@@ -85,7 +85,9 @@ def cadastrarPessoa(nome, idade, altura, peso, classificacao):
         cursor = conn.cursor()
         dadosPessoa = (nome, idade, peso, altura, classificacao)
         inserirPessoa = """
-                INSERT INTO tb01_pessoa (tb01_nome, tb01_idade, tb01_peso, tb01_altura, tb01_classificacao)
+                INSERT INTO tb01_pessoa (tb01_nome, tb01_idade,
+                tb01_peso, tb01_altura,
+                tb01_classificacao)
                 VALUES (?,?,?,?,?)"""
         cursor.execute(inserirPessoa, dadosPessoa)
         conn.commit()
@@ -93,6 +95,7 @@ def cadastrarPessoa(nome, idade, altura, peso, classificacao):
         print("Erro ao cadastrar pessoa: " + str(e))
     finally:
         conn.close()
+        
 def editarPessoas():
     if not listarPessoas():
         return
@@ -216,7 +219,7 @@ def mostrarGrafico():
         x = np.array(classificacoes)
         y = np.array([quantidades_dict[classificacao] for classificacao in classificacoes])
         
-        plt.figure(figsize=(12, 6))  # Mover a chamada de plt.figure() para o início
+        plt.figure(figsize=(12, 6)) 
         
         plt.xlabel("Classificação")
         plt.ylabel("Quantidade")
@@ -279,15 +282,15 @@ def obterEscolha():
     while True:
         try:
             escolha = int(input("""O que você deseja fazer?
-                        1 - Cadastrar uma nova pessoa
-                        2 - Listar as pessoas cadastradas
-                        3 - Editar os dados de alguma pessoa
-                        4 - Apagar alguma pessoa
-                        5 - Apagar todos os dados cadastrados
-                        6 - Gerar Gráfico
-                        0 - Sair do programa
+1 - Cadastrar uma nova pessoa
+2 - Listar as pessoas cadastradas
+3 - Editar os dados de alguma pessoa
+4 - Apagar alguma pessoa
+5 - Apagar todos os dados cadastrados
+6 - Gerar Gráfico
+0 - Sair do programa
                             
-                        : """))
+: """))
             return escolha
         except ValueError:
             print("Por favor, digite um número válido.")
