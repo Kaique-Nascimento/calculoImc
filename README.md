@@ -1,5 +1,6 @@
 # Cálculo de Índice de Massa Corporal (IMC)
 ![Static Badge](https://img.shields.io/badge/PYTHON-%233776AB?style=for-the-badge&logo=python&logoColor=white)
+![Static Badge](https://img.shields.io/badge/sqlite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
 ## Por que?
 Trabalho da matéria de Linguagem de Programação da minha faculdade de Cibersegurança. Para treinar meus conhecimentos em Python, foi pedido um trabalho para desenvolver esse algoritmo seguindo algumas métricas passadas pelo Tutor.
